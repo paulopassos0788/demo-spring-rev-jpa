@@ -21,4 +21,9 @@ public class AutorDao {
     public void update(Autor autor) {
         this.entityManager.merge(autor);
     }
+
+    @Transactional(readOnly = false)
+    public void delete(Long id) {
+        this.entityManager.remove(this.entityManager.getReference(Autor.class, id));
+    }
 }

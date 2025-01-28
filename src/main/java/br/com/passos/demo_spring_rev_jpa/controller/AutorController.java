@@ -27,4 +27,10 @@ public class AutorController {
         autorDao.update(autor);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(autor);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        autorDao.delete(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
 }
