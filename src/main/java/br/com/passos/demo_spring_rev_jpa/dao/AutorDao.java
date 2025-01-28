@@ -16,4 +16,9 @@ public class AutorDao {
     public void salvar(Autor autor) {
         this.entityManager.persist(autor);
     }
+
+    @Transactional(readOnly = false)
+    public void update(Autor autor) {
+        this.entityManager.merge(autor);
+    }
 }
