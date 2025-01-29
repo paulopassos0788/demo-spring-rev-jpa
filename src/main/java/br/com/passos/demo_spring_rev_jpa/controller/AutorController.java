@@ -33,4 +33,10 @@ public class AutorController {
         autorDao.delete(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Autor> findById(@PathVariable Long id) {
+        Autor autor = autorDao.findById(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(autor);
+    }
 }
