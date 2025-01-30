@@ -3,6 +3,7 @@ package br.com.passos.demo_spring_rev_jpa.controller;
 import br.com.passos.demo_spring_rev_jpa.dao.AutorDao;
 import br.com.passos.demo_spring_rev_jpa.entity.Autor;
 import br.com.passos.demo_spring_rev_jpa.entity.InfoAutor;
+import br.com.passos.demo_spring_rev_jpa.projection.AutorInfoProjection;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -70,5 +71,11 @@ public class AutorController {
     public ResponseEntity<List<Autor>> findByCargo(@RequestParam String cargo) {
         List<Autor> listaAutores = autorDao.findByCargo(cargo);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(listaAutores);
+    }
+
+    @GetMapping("autor-info")
+    public ResponseEntity<AutorInfoProjection> findAutorInfoById(@RequestParam Long id){
+        AutorInfoProjection autorInfoProjection = autorDao.findAutorInfoById(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(autorInfoProjection);
     }
 }

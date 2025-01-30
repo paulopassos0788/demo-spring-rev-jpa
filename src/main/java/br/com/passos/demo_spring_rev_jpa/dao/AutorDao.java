@@ -2,6 +2,7 @@ package br.com.passos.demo_spring_rev_jpa.dao;
 
 import br.com.passos.demo_spring_rev_jpa.entity.Autor;
 import br.com.passos.demo_spring_rev_jpa.entity.InfoAutor;
+import br.com.passos.demo_spring_rev_jpa.projection.AutorInfoProjection;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -79,7 +80,21 @@ public class AutorDao {
                 .setParameter("cargo", "%" + cargo + "%")
                 .getResultList();
         return result;
-
     }
+
+    @Transactional(readOnly = true)
+    public AutorInfoProjection findAutorInfoById(Long id) {
+        String query = """
+                select new AutorInfoProjection(a.nome, a.sobrenome, a.infoAutor.cargo, a.infoAutor.bio)
+                from Autor a
+                where a.id = :id
+                """;
+        return this.entityManager
+                .createQuery(query, AutorInfoProjection.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+
 
 }
