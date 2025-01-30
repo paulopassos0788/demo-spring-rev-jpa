@@ -50,4 +50,13 @@ public class AutorDao {
                 .getResultList();
         return listaAutores;
     }
+
+    @Transactional(readOnly = true)
+    public Long getTotalElementos() {
+        String query = "select count(1) from Autor a";
+        Long total = this.entityManager
+                .createQuery(query, Long.class)
+                .getSingleResult();
+        return total;
+    }
 }

@@ -52,4 +52,10 @@ public class AutorController {
         List<Autor> listaAutores = autorDao.findAllNomeOrSobrenome(termo);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(listaAutores);
     }
+
+    @GetMapping("total")
+    public ResponseEntity<Long> getTotalElementos() {
+        Long total = autorDao.getTotalElementos();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(total);
+    }
 }
