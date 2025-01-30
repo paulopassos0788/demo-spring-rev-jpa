@@ -5,7 +5,6 @@ import br.com.passos.demo_spring_rev_jpa.entity.Autor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -45,6 +44,12 @@ public class AutorController {
     @GetMapping
     public ResponseEntity<List<Autor>> findAll() {
         List<Autor> listaAutores = autorDao.findAll();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(listaAutores);
+    }
+
+    @GetMapping("nomeOrSobrenome")
+    public ResponseEntity<List<Autor>> findAllNomeOrSobrenome(@RequestParam String termo) {
+        List<Autor> listaAutores = autorDao.findAllNomeOrSobrenome(termo);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(listaAutores);
     }
 }

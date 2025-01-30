@@ -40,4 +40,14 @@ public class AutorDao {
         List<Autor> listaAutores = this.entityManager.createQuery(query, Autor.class).getResultList();
         return listaAutores;
     }
+
+    @Transactional(readOnly = true)
+    public List<Autor> findAllNomeOrSobrenome(String termo) {
+        String query = "select a from Autor a where a.nome like :termo OR a.sobrenome like :termo";
+        List<Autor> listaAutores = this.entityManager
+                .createQuery(query, Autor.class)
+                .setParameter("termo", "%" + termo + "%")
+                .getResultList();
+        return listaAutores;
+    }
 }
