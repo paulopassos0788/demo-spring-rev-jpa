@@ -65,4 +65,10 @@ public class AutorController {
         Autor autor = autorDao.salvaInfAutor(infoAutor, id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(autor);
     }
+
+    @GetMapping("info")
+    public ResponseEntity<List<Autor>> findByCargo(@RequestParam String cargo) {
+        List<Autor> listaAutores = autorDao.findByCargo(cargo);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(listaAutores);
+    }
 }
