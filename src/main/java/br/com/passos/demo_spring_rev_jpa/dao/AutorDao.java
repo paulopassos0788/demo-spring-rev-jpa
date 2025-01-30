@@ -1,11 +1,11 @@
 package br.com.passos.demo_spring_rev_jpa.dao;
 
 import br.com.passos.demo_spring_rev_jpa.entity.Autor;
+import br.com.passos.demo_spring_rev_jpa.entity.InfoAutor;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Repository
@@ -59,4 +59,12 @@ public class AutorDao {
                 .getSingleResult();
         return total;
     }
+
+    @Transactional(readOnly = false)
+    public Autor salvaInfAutor(InfoAutor infoAutor, Long autorId) {
+        Autor autor = findById(autorId);
+        autor.setInfoAutor(infoAutor);
+        return autor;
+    }
+
 }

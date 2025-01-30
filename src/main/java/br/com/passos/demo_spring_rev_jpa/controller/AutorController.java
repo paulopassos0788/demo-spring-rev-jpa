@@ -2,6 +2,7 @@ package br.com.passos.demo_spring_rev_jpa.controller;
 
 import br.com.passos.demo_spring_rev_jpa.dao.AutorDao;
 import br.com.passos.demo_spring_rev_jpa.entity.Autor;
+import br.com.passos.demo_spring_rev_jpa.entity.InfoAutor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,5 +58,11 @@ public class AutorController {
     public ResponseEntity<Long> getTotalElementos() {
         Long total = autorDao.getTotalElementos();
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(total);
+    }
+
+    @PutMapping("{id}/info")
+    public ResponseEntity<Autor> salvaInfAutor(@PathVariable Long id, @RequestBody InfoAutor infoAutor) {
+        Autor autor = autorDao.salvaInfAutor(infoAutor, id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(autor);
     }
 }

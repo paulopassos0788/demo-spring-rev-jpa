@@ -16,7 +16,7 @@ public class InfoAutor implements Serializable {
     @Column(name = "cargo", length = 45, nullable = false)
     private String cargo;
 
-    @Column(name = "bio", length = 25, nullable = true)
+    @Column(name = "bio", length = 255, nullable = true)
     private String bio;
 
     public Long getId() {
