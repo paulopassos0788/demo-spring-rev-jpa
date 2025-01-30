@@ -6,6 +6,8 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public class AutorDao {
 
@@ -30,5 +32,12 @@ public class AutorDao {
     @Transactional(readOnly = true)
     public Autor findById(Long id) {
         return this.entityManager.find(Autor.class, id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Autor> findAll() {
+        String query = "select a from Autor a";
+        List<Autor> listaAutores = this.entityManager.createQuery(query, Autor.class).getResultList();
+        return listaAutores;
     }
 }

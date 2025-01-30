@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/autores")
 public class AutorController {
@@ -38,5 +40,11 @@ public class AutorController {
     public ResponseEntity<Autor> findById(@PathVariable Long id) {
         Autor autor = autorDao.findById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(autor);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Autor>> findAll() {
+        List<Autor> listaAutores = autorDao.findAll();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(listaAutores);
     }
 }
