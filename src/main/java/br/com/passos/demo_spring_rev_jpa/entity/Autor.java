@@ -19,8 +19,16 @@ public class Autor implements Serializable {
     @Column(name = "sobrenome", length = 45, nullable = false)
     private String sobrenome;
 
-    public void setId(Long id) {
-        this.id = id;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "id_info")
+    private InfoAutor infoAutor;
+
+    public InfoAutor getInfoAutor() {
+        return infoAutor;
+    }
+
+    public void setInfoAutor(InfoAutor infoAutor) {
+        this.infoAutor = infoAutor;
     }
 
     public Long getId() {
